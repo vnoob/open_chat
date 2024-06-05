@@ -68,6 +68,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     message = "Sorry, an error encountered while handling your request"
 
     # Finally, send the message
+    print(f"chat_id: {update['message']['chat']['id']}")
     await context.bot.send_message(chat_id=update['message']['chat']['id'], text=message)
 
 
