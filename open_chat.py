@@ -130,4 +130,5 @@ PORT = 65432
 
 print("Start socket")
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((HOST, PORT))
+s.listen()
+print("End socket")
