@@ -14,9 +14,6 @@ Basic Echobot example, repeats messages.
 Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
-import logging
-import socket
-
 import os
 from dotenv import load_dotenv
 import logging
@@ -71,7 +68,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     message = "Sorry, an error encountered while handling your request"
 
     # Finally, send the message
-    await context.bot.send_message(text=message)
+    await context.bot.send_message(chat_id=update['message']['chat']['id'], text=message)
 
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -116,19 +113,8 @@ def main() -> None:
     # on non command i.e message - echo the message on Telegram
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
-    # Run the bot until the user presses Ctrl-C
-    print("Start polling")
     application.run_polling(allowed_updates=Update.ALL_TYPES)
-    print("Stop polling")
 
 
 if __name__ == "__main__":
     main()
-
-HOST = '127.0.0.1'
-PORT = 65432
-
-print("Start socket")
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.listen()
-print("End socket")
