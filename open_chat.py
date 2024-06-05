@@ -74,7 +74,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
-    genai.configure(api_key=os.environ.get('GEMINI_BOT_TOKEN'))
+    genai.configure(api_key="AIzaSyBqEm-UEKmRoQdKv1u_fOnpza5mue5GdFE")
 
     # Create the model
     # See https://ai.google.dev/api/python/google/generativeai/GenerativeModel
@@ -82,12 +82,12 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "temperature": 1,
         "top_p": 0.95,
         "top_k": 128,
-        "max_output_tokens": int(os.environ.get('MAX_OUTPUT_TOKEN')),
+        "max_output_tokens": 1048576,
         "response_mime_type": "text/plain",
     }
 
     model = genai.GenerativeModel(
-        model_name=os.environ.get('GEMINI_MODEL'),
+        model_name="gemini-1.5-pro",
         generation_config=generation_config,
         # safety_settings = Adjust safety settings
         # See https://ai.google.dev/gemini-api/docs/safety-settings
@@ -105,7 +105,7 @@ load_dotenv()
 def main() -> None:
     """Start the bot."""
     # Create the Application and pass it your bot's token.
-    application = Application.builder().token(os.environ.get('TELEGRAM_BOT_TOKEN')).build()
+    application = Application.builder().token("7174414575:AAEapQ55TOycYd4UdRQtoa7B603u6ozxOfU").build()
 
     # on different commands - answer in Telegram
     application.add_handler(CommandHandler("start", start))
