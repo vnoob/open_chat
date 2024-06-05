@@ -21,6 +21,9 @@ import logging
 from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
+from flask import Flask
+
+
 
 """
 Install the Google AI Python SDK
@@ -103,6 +106,13 @@ def main() -> None:
     # Run the bot until the user presses Ctrl-C
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 
+
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
 
 if __name__ == "__main__":
     main()
