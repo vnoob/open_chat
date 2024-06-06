@@ -62,7 +62,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     # Log the error before we do anything else, so we can see it even if something breaks.
     logger.error("Exception while handling an update:", exc_info=context.error)
 
-    message = "Sorry, an error encountered while handling your request"
+    message = "Sorry, an error encountered while handling your request."
 
     # Finally, send the message
     print(f"chat_id: {update['message']['chat']['id']}")
@@ -71,7 +71,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
-    genai.configure(api_key="AIzaSyBqEm-UEKmRoQdKv1u_fOnpza5mue5GdFE")
+    genai.configure(api_key="AIzaSyAqLHqSm5AehkyZS-mTq8daEC90sfH55dg")
 
     # Create the model
     # See https://ai.google.dev/api/python/google/generativeai/GenerativeModel
