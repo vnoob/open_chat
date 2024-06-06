@@ -21,9 +21,6 @@ import logging
 from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
-from flask import Flask
-
-
 
 """
 Install the Google AI Python SDK
