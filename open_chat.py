@@ -15,8 +15,8 @@ Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
 import os
-from dotenv import load_dotenv
 import logging
+from dotenv import load_dotenv
 
 from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
@@ -28,7 +28,7 @@ Install the Google AI Python SDK
 $ pip install google-generativeai
 
 See the getting started guide for more information:
-https://ai.google.dev/gemini-api/docs/get-started/python
+pip install -q -U google-generativeai
 """
 import google.generativeai as genai
 
@@ -71,7 +71,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
-    genai.configure(api_key="AIzaSyAqLHqSm5AehkyZS-mTq8daEC90sfH55dg")
+    genai.configure(api_key=os.getenv("GEMINI_AI_TOKEN"))
 
     # Create the model
     # See https://ai.google.dev/api/python/google/generativeai/GenerativeModel
@@ -97,12 +97,10 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(response.text)
 
 load_dotenv()
-
-
 def main() -> None:
     """Start the bot."""
     # Create the Application and pass it your bot's token.
-    application = Application.builder().token("7174414575:AAEapQ55TOycYd4UdRQtoa7B603u6ozxOfU").build()
+    application = Application.builder().token(os.getenv("TELEGRAM_BOT_TOKEN")).build()
 
     # on different commands - answer in Telegram
     application.add_handler(CommandHandler("start", start))
